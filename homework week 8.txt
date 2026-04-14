@@ -1,0 +1,66 @@
+import csv
+import sys
+
+def main():
+    # Check for correct command-line usage
+    if len(sys.argv) < 2:
+        sys.exit("Usage: python solution.py data.csv")
+
+    count = 0
+    try:
+        with open(sys.argv[1], "r") as file:
+            # Using DictReader to access columns by their header names
+            reader = csv.DictReader(file)
+            for row in reader:
+                # Example: Counting students in a specific department
+                if row["department"] == "Civil Engineering":
+                    count += 1
+        
+        print(f"Total students in Civil Engineering: {count}")
+
+    except FileNotFoundError:
+        sys.exit("File not found")
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+import csv
+
+def main():
+    students = []
+
+    with open("students.csv") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            students.append({"name": row["name"], "home": row["home"]})
+
+    # Sorting students alphabetically by name using a lambda function
+    for student in sorted(students, key=lambda student: student["name"]):
+        print(f"{student['name']} is from {student['home']}")
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+import csv
+
+def main():
+    students = []
+
+    with open("students.csv") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            students.append({"name": row["name"], "home": row["home"]})
+
+    # Sorting students alphabetically by name using a lambda function
+    for student in sorted(students, key=lambda student: student["name"]):
+        print(f"{student['name']} is from {student['home']}")
+
+if __name__ == "__main__":
+    main()
