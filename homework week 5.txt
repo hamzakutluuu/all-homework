@@ -1,0 +1,209 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+    int *numbers = NULL;
+    int capacity = 3;
+    int size = 0;
+
+    // Allocate initial memory
+    numbers = malloc(capacity * sizeof(int));
+    if (numbers == NULL)
+    {
+        fprintf(stderr, "Memory allocation failed.\n");
+        return 1;
+    }
+
+    // Add numbers dynamically
+    for (int i = 0; i < 10; i++)  // simulating user adding 10 numbers
+    {
+        if (size == capacity)
+        {
+            capacity *= 2;
+            int *temp = realloc(numbers, capacity * sizeof(int));
+            if (temp == NULL)
+            {
+                free(numbers);
+                fprintf(stderr, "Failed to reallocate memory.\n");
+                return 1;
+            }
+            numbers = temp;
+        }
+        numbers[size] = i + 1;
+        size++;
+    }
+
+    // Print numbers
+    for (int i = 0; i < size; i++)
+        printf("%i ", numbers[i]);
+    printf("\n");
+
+    free(numbers);
+    return 0;
+}
+   
+
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+    int number;
+    struct node *next;
+}
+node;
+
+int main(void)
+{
+    node *list = NULL;
+
+    // Prepend some nodes
+    for (int i = 0; i < 3; i++)
+    {
+        node *n = malloc(sizeof(node));
+        if (n == NULL)
+        {
+            fprintf(stderr, "Memory allocation failed.\n");
+            return 1;
+        }
+        n->number = i;
+        n->next = list;
+        list = n;
+    }
+
+    // Print the list
+    for (node *tmp = list; tmp != NULL; tmp = tmp->next)
+        printf("%i -> ", tmp->number);
+    printf("NULL\n");
+
+    // Free memory
+    node *tmp = list;
+    while (tmp != NULL)
+    {
+        node *next = tmp->next;
+        free(tmp);
+        tmp = next;
+    }
+}
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+    int number;
+    struct node *next;
+}
+node;
+
+int main(void)
+{
+    // Create list manually for demonstration
+    node *list = malloc(sizeof(node));
+    list->number = 1;
+    list->next = malloc(sizeof(node));
+    list->next->number = 2;
+    list->next->next = malloc(sizeof(node));
+    list->next->next->number = 3;
+    list->next->next->next = NULL;
+
+    // Traverse and print
+    for (node *tmp = list; tmp != NULL; tmp = tmp->next)
+        printf("%i -> ", tmp->number);
+    printf("NULL\n");
+
+    // Free all memory
+    node *tmp = list;
+    while (tmp != NULL)
+    {
+        node *next = tmp->next;
+        free(tmp);
+        tmp = next;
+    }
+
+    return 0;
+}
+ 
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+    int number;
+    struct node *next;
+}
+node;
+
+void print_list(node *list)
+{
+    for (node *tmp = list; tmp != NULL; tmp = tmp->next)
+        printf("%i -> ", tmp->number);
+    printf("NULL\n");
+}
+
+void free_list(node *list)
+{
+    node *tmp = list;
+    while (tmp != NULL)
+    {
+        node *next = tmp->next;
+        free(tmp);
+        tmp = next;
+    }
+}
+
+int main(void)
+{
+    node *list = NULL;
+    int choice, num;
+
+    while (1)
+    {
+        printf("\n1. Add number\n2. Print list\n3. Exit\nChoose: ");
+        scanf("%d", &choice);
+
+        if (choice == 1)
+        {
+            printf("Enter number: ");
+            scanf("%d", &num);
+
+            node *n = malloc(sizeof(node));
+            if (!n)
+            {
+                fprintf(stderr, "Memory allocation failed.\n");
+                free_list(list);
+                return 1;
+            }
+            n->number = num;
+            n->next = list;
+            list = n;
+        }
+        else if (choice == 2)
+        {
+            print_list(list);
+        }
+        else if (choice == 3)
+        {
+            free_list(list);
+            break;
+        }
+        else
+        {
+            printf("Invalid choice.\n");
+        }
+    }
+
+    return 0;
+}
+s

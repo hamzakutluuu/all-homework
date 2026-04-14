@@ -1,0 +1,104 @@
+# Function to convert Celsius to Fahrenheit
+celsius = float(input("Enter temperature in Celsius: "))
+
+# Formula: (0°C × 9/5) + 32 = 32°F
+fahrenheit = (celsius * 9/5) + 32
+
+print(f"{celsius}°C is equal to {fahrenheit}°F")
+
+
+
+
+
+import random
+
+# Generate a random number between 1 and 50
+secret_number = random.randint(1, 50)
+guess = None
+
+print("I am thinking of a number between 1 and 50.")
+
+while guess != secret_number:
+    guess = int(input("Enter your guess: "))
+    
+    if guess < secret_number:
+        print("Too low! Try again.")
+    elif guess > secret_number:
+        print("Too high! Try again.")
+    else:
+        print(f"Congratulations! You found the number {secret_number}.")
+
+
+# List of grades
+grades = [85, 92, 78, 90, 88]
+total = 0
+
+# Calculate sum using a loop
+for grade in grades:
+    total += grade
+
+average = total / len(grades)
+
+# Determine the letter grade
+if average >= 90:
+    letter = 'A'
+elif average >= 80:
+    letter = 'B'
+elif average >= 70:
+    letter = 'C'
+else:
+    letter = 'F'
+
+print(f"Average Score: {average}")
+print(f"Final Letter Grade: {letter}")
+
+
+
+
+text = input("Enter a sentence: ").lower()
+words = text.split()
+word_count = {}
+
+# Counting frequencies using a dictionary
+for word in words:
+    if word in word_count:
+        word_count[word] += 1
+    else:
+        word_count[word] = 1
+
+print("\nWord Frequency:")
+for word, count in word_count.items():
+    print(f"{word}: {count}")
+
+
+
+cart = {}
+
+print("--- Welcome to the Shopping Cart ---")
+
+while True:
+    action = input("\nChoose an action (add / view / exit): ").lower()
+    
+    if action == "add":
+        item = input("Enter item name: ")
+        price = float(input("Enter item price: "))
+        cart[item] = price
+        print(f"{item} added to the cart.")
+        
+    elif action == "view":
+        print("\nYour Cart Items:")
+        total_cost = 0
+        for item, price in cart.items():
+            print(f"- {item}: ${price:.2f}")
+            total_cost += price
+        print(f"Total: ${total_cost:.2f}")
+        
+    elif action == "exit":
+        print("Thank you for shopping!")
+        break
+    else:
+        print("Invalid action. Please try again.")
+
+
+
+
