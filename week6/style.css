@@ -1,0 +1,79 @@
+/* Temel Ayarlar */
+:root {
+    --primary-color: #3498db;
+    --shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Flexbox - Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #2c3e50;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Grid - Projeler */
+.projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 40px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease; /* Transition */
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Animasyonlar */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    animation: fadeIn 1.5s ease-out; /* Keyframe Animation */
+}
+
+/* Responsive Tasarım (Mobil Uyumluluk) */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+    }
+}
+
+/* Fixed Pozisyon */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background: var(--primary-color);
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 50%;
+}
